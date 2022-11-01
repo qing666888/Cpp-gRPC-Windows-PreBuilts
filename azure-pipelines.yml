@@ -27,8 +27,8 @@ workspace:
 variables:
     build_grpc_version: '1.50.0'
     build_configuration: 'Release'
-    build_architecture: 'x64'
-    build_toolchain: 'MSVC143'
+    build_architecture: 'x86'
+    build_toolchain: 'MSVC141'
 
 steps:
 - script: |
@@ -52,7 +52,7 @@ steps:
   displayName: '[CMake] Configure'
   inputs:
       workingDirectory: $(Build.SourcesDirectory)/grpc/_mybuild
-      cmakeArgs: .. -G "Visual Studio 17 2022" -A x64 -DABSL_ENABLE_INSTALL:BOOL=ON -DCARES_STATIC_PIC:BOOL=ON -DRE2_BUILD_TESTING:BOOL=OFF -DCMAKE_INSTALL_PREFIX=$(Build.SourcesDirectory)\_out -DCMAKE_BUILD_TYPE=$(build_configuration) -DLIBRARY_OUTPUT_PATH:PATH=$(Build.SourcesDirectory)\_out\lib -DEXECUTABLE_OUTPUT_PATH:PATH=$(Build.SourcesDirectory)\_out\bin -DCMAKE_SYSTEM_VERSION=10.0.19041
+      cmakeArgs: .. -G "Visual Studio 15 2017" -A x86 -DABSL_ENABLE_INSTALL:BOOL=ON -DCARES_STATIC_PIC:BOOL=ON -DRE2_BUILD_TESTING:BOOL=OFF -DCMAKE_INSTALL_PREFIX=$(Build.SourcesDirectory)\_out -DCMAKE_BUILD_TYPE=$(build_configuration) -DLIBRARY_OUTPUT_PATH:PATH=$(Build.SourcesDirectory)\_out\lib -DEXECUTABLE_OUTPUT_PATH:PATH=$(Build.SourcesDirectory)\_out\bin -DCMAKE_SYSTEM_VERSION=10.0.17763
 - script: |
     dir $(Build.SourcesDirectory)\grpc\_mybuild
 - task: MSBuild@1
